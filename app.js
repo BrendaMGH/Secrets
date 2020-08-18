@@ -17,14 +17,14 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine","ejs");
 app.use(express.static("public"));
 app.use(session({
-    secret: "Secret key for passwords.",
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true
 }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb://localhost:27017/userDB",{useNewUrlParser: true, useUnifiedTopology:true});
+mongoose.connect('mongodb+srv://'+process.env.USERNAME_MONGODB+':'+process.env.PASSWORD+'@cluster0.kc503.mongodb.net/userDB',{useNewUrlParser: true, useUnifiedTopology:true});
 mongoose.set("useCreateIndex",true);
 
 //Creating the model for the DB
